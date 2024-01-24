@@ -18,35 +18,37 @@ namespace Solid.Data.Repositories
 
         public IEnumerable<Designer> Get()
         {
-             return _context._Designers;
+             return _context.Designers;
         }
 
         public Designer Get(int id)
         {
             Designer designer = new Designer();
-            return _context._Designers.Find(i => i.Id == id);
+            return _context.Designers.Find(id);
          
         }
 
        
         public Designer Post( Designer value)
         {
-            _context._Designers.Add(value);
-            return _context._Designers.Find(i => i.Id == value.Id);
+            _context.Designers.Add(value);
+            _context.SaveChanges();
+            return _context.Designers.Find( value.Id);
         }
 
      
         public Designer Put(int id, Designer value)
         {
             Designer designer;
-            designer = _context._Designers.Find(i => i.Id == id);
+            designer = _context.Designers.Find(id);
             if (designer != null)
             {
-                designer.Name = value.Name;
-                designer.Phone = value.Phone;
-                designer.Adress = value.Adress;
+                designer.Worker.Name = value.Worker.Name;
+                designer.Worker.Phone = value.Worker.Phone;
+                designer.Worker.Adress = value.Worker.Adress;
                 designer.IsDesigningAi = value.IsDesigningAi;
-                designer.Priority = value.Priority;
+                designer.Worker.Priority = value.Worker.Priority;
+                _context.SaveChanges();
             }
             return designer;
             
@@ -56,10 +58,11 @@ namespace Solid.Data.Repositories
         public Designer Delete(int id)
         {
             Designer designer;
-            designer = _context._Designers.Find(i => i.Id == id);
+            designer = _context.Designers.Find(id);
             if (designer != null)
             {
-                _context._Designers.Remove(designer);
+                _context.Designers.Remove(designer);
+                _context.SaveChanges();
             }
             return designer;
         }

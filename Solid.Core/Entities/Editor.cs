@@ -3,21 +3,14 @@
 namespace ManagingANewspaper
 {
     public enum TypeEditor { CONTENT,LITERARY,TORANY,GENERAL}
-    public class Editor:Worker
+    public class Editor
     {
 
         static int num = 0;
         public int Id { get; set; }
-
-        public TypeEditor TEditor {  get; set; }   
-        public Editor()
-        {
-            Id = num++;
-        }
-        public Editor(TypeEditor tEditor,string name, string phone, string ad, float salary=0, int priority = 0) : base(name, phone, ad, salary, priority)
-        {
-            Id = num++;
-            TEditor= tEditor;
-        }
+        public TypeEditor TEditor {  get; set; }
+        public int WorkerId { get; set; }
+        public Worker Worker { get; set; }
+        
     }
 }

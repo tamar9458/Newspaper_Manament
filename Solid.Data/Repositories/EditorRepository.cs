@@ -18,36 +18,37 @@ namespace Solid.Data.Repositories
 
         public IEnumerable<Editor> Get()
         {
-            return _context._Editors;
+            return _context.Editors;
         }
 
         public Editor Get(int id)
         {
             Editor editor = new Editor();
-            return _context._Editors.Find(i => i.Id == id);
+            return _context.Editors.Find(id);
           
         }
 
 
         public Editor Post(Editor value)
         {
-            _context._Editors.Add(value);
-            return _context._Editors.Find(i => i.Id == value.Id);
+            _context.Editors.Add(value);
+            _context.SaveChanges();
+            return _context.Editors.Find(value.Id);
         }
 
 
         public Editor Put(int id, Editor value)
         {
             Editor editor;
-            editor = _context._Editors.Find(i => i.Id == id);
+            editor = _context.Editors.Find(id);
             if (editor != null)
             {
-                editor.Name = value.Name;
-                editor.Phone = value.Phone;
-                editor.Adress = value.Adress;
+                editor.Worker.Name = value.Worker.Name;
+                editor.Worker.Phone = value.Worker.Phone;
+                editor.Worker.Adress = value.Worker.Adress;
                 editor.TEditor = value.TEditor;
-                editor.Priority = value.Priority;
-              
+                editor.Worker.Priority = value.Worker.Priority;
+                _context.SaveChanges();
             }
             return editor;
 
@@ -57,10 +58,11 @@ namespace Solid.Data.Repositories
         public Editor Delete(int id)
         {
             Editor editor;
-            editor = _context._Editors.Find(i => i.Id == id);
+            editor = _context.Editors.Find(id);
             if (editor != null)
             {
-                _context._Editors.Remove(editor);
+                _context.Editors.Remove(editor);
+                _context.SaveChanges() ;
             }
             return editor;
         }
