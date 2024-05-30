@@ -9,15 +9,14 @@ namespace Solid.Core.Repositories
 {
     public interface IEditorRepository
     {
-     
-        public IEnumerable<Editor> Get();
+        public Task<IEnumerable<Editor>> GetAsync();
 
-        public Editor Get(int id);
+        public Task<Editor> GetAsync(int id);
 
-        public Editor Post(Editor value);
+        public Task<Editor> PostAsync(Editor value);
 
-        public Editor Put(int id, Editor value);
+        public Task<Editor> PutAsync(int id, Editor value);
 
-        public Editor Delete(int id);
+        public Task<Editor> DeleteAsync(int id);
     }
 }

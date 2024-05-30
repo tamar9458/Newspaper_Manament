@@ -18,28 +18,28 @@ namespace Solid.Service.Services
             _designerRepository = dd;
         }
 
-        public IEnumerable<Designer> GetAll() {
-            return _designerRepository.Get();           
+        public async Task<IEnumerable<Designer>> GetAllAsync() {
+            return await _designerRepository.GetAsync();           
         }
 
-        public Designer GetById(int id)
+        public async Task<Designer> GetByIdAsync(int id)
         { 
-           return _designerRepository.Get(id);
+           return await _designerRepository.GetAsync(id);
         }
 
-        public Designer PostDesigner(Designer value)
+        public async Task<Designer> PostDesignerAsync(Designer value)
         {
-            return _designerRepository.Post(value);
+            return await _designerRepository.PostAsync(value);
         }
 
-        public Designer PutDesigner(int id, Designer value)
+        public async Task<Designer> PutDesignerAsync(int id, Designer value)
         {
-            return _designerRepository.Put(id, value);
+            return await _designerRepository.PutAsync(id, value);
         }
 
-        public Designer DeleteDesigner(int id) 
+        public async Task<Designer> DeleteDesignerAsync(int id) 
         {
-            return _designerRepository.Delete(id);
+            return await _designerRepository.DeleteAsync(id);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ManagingANewspaper;
+using Microsoft.EntityFrameworkCore;
 using Solid.Core.Repositories;
 using System;
 using System.Collections.Generic;
@@ -16,53 +17,53 @@ namespace Solid.Data.Repositories
             _context = dd;
         }
 
-        public IEnumerable<Editor> Get()
+        public async Task<IEnumerable<Editor>> GetAsync()
         {
-            return _context.Editors;
+            return await _context.Editors.ToListAsync(); 
         }
 
-        public Editor Get(int id)
+        public async Task<Editor> GetAsync(int id)
         {
             Editor editor = new Editor();
-            return _context.Editors.Find(id);
+            return await _context.Editors.FindAsync(id);
           
         }
 
 
-        public Editor Post(Editor value)
+        public async Task<Editor> PostAsync(Editor value)
         {
             _context.Editors.Add(value);
-            _context.SaveChanges();
-            return _context.Editors.Find(value.Id);
+            await _context.SaveChangesAsync();
+            return await _context.Editors.FindAsync(value.Id);
         }
 
 
-        public Editor Put(int id, Editor value)
+        public async Task<Editor> PutAsync(int id, Editor value)
         {
             Editor editor;
-            editor = _context.Editors.Find(id);
+            editor = await _context.Editors.FindAsync(id);
             if (editor != null)
             {
-                editor.Worker.Name = value.Worker.Name;
-                editor.Worker.Phone = value.Worker.Phone;
-                editor.Worker.Adress = value.Worker.Adress;
+                editor.Name = value.Name;
+                editor.Phone = value.Phone;
+                editor.Adress = value.Adress;
                 editor.TEditor = value.TEditor;
-                editor.Worker.Priority = value.Worker.Priority;
-                _context.SaveChanges();
+                editor.Priority = value.Priority;
+                await _context.SaveChangesAsync();
             }
             return editor;
 
         }
 
 
-        public Editor Delete(int id)
+        public async Task<Editor> DeleteAsync(int id)
         {
             Editor editor;
-            editor = _context.Editors.Find(id);
+            editor = await _context.Editors.FindAsync(id);
             if (editor != null)
             {
                 _context.Editors.Remove(editor);
-                _context.SaveChanges() ;
+                await _context.SaveChangesAsync() ;
             }
             return editor;
         }

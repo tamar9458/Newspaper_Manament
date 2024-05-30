@@ -17,29 +17,29 @@ namespace Solid.Service.Services
             _editorRepository = dd;
         }
 
-        public IEnumerable<Editor> GetAll()
+        public async Task<IEnumerable<Editor>> GetAllAsync()
         {
-           return _editorRepository.Get();            
+           return await _editorRepository.GetAsync();            
         }
 
-        public Editor GetById(int id)
+        public async Task<Editor> GetByIdAsync(int id)
         {
-            return _editorRepository.Get(id);
+            return await _editorRepository.GetAsync(id);
         }
 
-        public Editor PostEditor(Editor value)
+        public async Task<Editor> PostEditorAsync(Editor value)
         {
-            return _editorRepository.Post(value);
+            return await _editorRepository.PostAsync(value);
         }
 
-        public Editor PutEditor(int id, Editor value)
+        public async Task<Editor> PutEditorAsync(int id, Editor value)
         {
-            return _editorRepository.Put(id, value);
+            return  await _editorRepository.PutAsync(id, value);
         }
 
-        public Editor DeleteEditor(int id)
+        public async Task<Editor> DeleteEditorAsync(int id)
         {
-             return _editorRepository.Delete(id);
+             return await _editorRepository.DeleteAsync(id);
         }
 
     }

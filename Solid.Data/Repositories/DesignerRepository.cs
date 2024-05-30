@@ -16,53 +16,54 @@ namespace Solid.Data.Repositories
             _context = dd;  
         }
 
-        public IEnumerable<Designer> Get()
+        public async Task<IEnumerable<Designer>> GetAsync()
         {
              return _context.Designers;
         }
 
-        public Designer Get(int id)
+        public async Task<Designer> GetAsync(int id)
         {
             Designer designer = new Designer();
-            return _context.Designers.Find(id);
+            return await _context.Designers.FindAsync(id);
          
         }
 
        
-        public Designer Post( Designer value)
+        public async Task<Designer> PostAsync( Designer value)
         {
             _context.Designers.Add(value);
-            _context.SaveChanges();
-            return _context.Designers.Find( value.Id);
+            await _context.SaveChangesAsync();
+            return await _context.Designers.FindAsync( value.Id);
         }
 
      
-        public Designer Put(int id, Designer value)
+        public async Task<Designer> PutAsync(int id, Designer value)
         {
             Designer designer;
-            designer = _context.Designers.Find(id);
+            designer = await  _context.Designers.FindAsync(id);
             if (designer != null)
             {
-                designer.Worker.Name = value.Worker.Name;
-                designer.Worker.Phone = value.Worker.Phone;
-                designer.Worker.Adress = value.Worker.Adress;
+                designer.Name = value.Name;
+                designer.Phone = value.Phone;
+                designer.Adress = value.Adress;
                 designer.IsDesigningAi = value.IsDesigningAi;
-                designer.Worker.Priority = value.Worker.Priority;
-                _context.SaveChanges();
+                designer.Priority = value.Priority;
+                designer.Articles = value.Articles;
+                await _context.SaveChangesAsync();
             }
             return designer;
             
         }
 
        
-        public Designer Delete(int id)
+        public async Task<Designer> DeleteAsync(int id)
         {
             Designer designer;
-            designer = _context.Designers.Find(id);
+            designer = await _context.Designers.FindAsync(id);
             if (designer != null)
             {
                 _context.Designers.Remove(designer);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             return designer;
         }

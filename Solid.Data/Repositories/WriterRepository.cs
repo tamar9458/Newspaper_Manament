@@ -1,7 +1,9 @@
 ﻿using ManagingANewspaper;
+using Microsoft.EntityFrameworkCore;
 using Solid.Core.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,51 +17,52 @@ namespace Solid.Data.Repositories
         {
             _context = dd;
         }
-        public IEnumerable<Writer> Get()
+        public async Task<IEnumerable<Writer>> GetAsync()
         {
-            return _context.Writers;
+            return await _context.Writers.ToListAsync();
         }
 
-    
-        public Writer Get(int id)
+
+        public async Task<Writer> GetAsync(int id)
         {
-           return _context.Writers.Find(id);
+           return await _context.Writers.FindAsync(id);
         }
 
-       
-        public Writer Post( Writer value)
+
+        public async Task<Writer> PostAsync( Writer value)
         {
             _context.Writers.Add(value);
-            _context.SaveChanges();
-            return _context.Writers.Find(value.Id);
+            await _context.SaveChangesAsync();
+            return await _context.Writers.FindAsync(value.Id);
         }
 
-        public Writer Put(int id,  Writer value)
+        public async Task<Writer> PutAsync(int id,  Writer value)
         {
             Writer writer;
-            writer = _context.Writers.Find(id);
+            writer = await _context.Writers.FindAsync(id);
             if (writer != null)
             {
-                writer.Worker.Adress = value.Worker.Adress;
-                writer.Worker.Name = value.Worker.Name;
-                writer.Worker.Phone = value.Worker.Phone;
-                writer.Worker.Salary = value.Worker.Salary;
+                writer.Adress = value.Adress;
+                writer.Name = value.Name;
+                writer.Phone = value.Phone;
+                writer.Salary = value.Salary;
                 writer.TWriter = value.TWriter;
-                writer.Worker.Priority = value.Worker.Priority;
-                _context.SaveChanges();
+                writer.Priority = value.Priority;
+                writer.Articles = value.Articles;
+                await _context.SaveChangesAsync();
             }
             return writer;
         }
 
-    
-        public Writer Delete(int id)
+
+        public async Task<Writer> DeleteAsync(int id)
         {
             Writer writer;
-            writer = _context.Writers.Find(id);
+            writer = await _context.Writers.FindAsync(id);
             if (writer != null)
             {
                 _context.Writers.Remove(writer);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             return writer;
 

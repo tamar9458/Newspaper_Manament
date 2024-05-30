@@ -10,15 +10,15 @@ namespace Solid.Core.Repositories
 {
     public interface IWriterRepository
     {
-      
-        public IEnumerable<Writer> Get();
 
-        public Writer Get(int id);
+        public Task<IEnumerable<Writer>> GetAsync();
 
-        public Writer Post(Writer value);
+        public Task<Writer> GetAsync(int id);
 
-        public Writer Put(int id, Writer value);
+        public Task<Writer> PostAsync(Writer value);
 
-        public Writer Delete(int id);
+        public Task<Writer> PutAsync(int id, Writer value);
+
+        public Task<Writer> DeleteAsync(int id);
     }
 }

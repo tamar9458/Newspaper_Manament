@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Solid.Core.Entities;
 using System.Formats.Asn1;
 using System.Globalization;
 
@@ -9,6 +10,9 @@ namespace ManagingANewspaper
         public DbSet<Designer> Designers { get; set; }
         public  DbSet<Editor> Editors { get; set; }
         public  DbSet<Writer> Writers { get; set; }
+        public DbSet<Article> Articles { get; set; }
+        
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

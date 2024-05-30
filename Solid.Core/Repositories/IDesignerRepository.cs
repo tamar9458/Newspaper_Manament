@@ -1,4 +1,5 @@
 ﻿using ManagingANewspaper;
+using Solid.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +10,15 @@ using System.Threading.Tasks;
 namespace Solid.Core.Repositories
 {
     public interface IDesignerRepository
-    {
-       
-        public IEnumerable<Designer> Get();
+    {      
+        public Task<IEnumerable<Designer>> GetAsync();
 
-        public Designer Get(int id);
+        public Task<Designer> GetAsync(int id);
 
-        public Designer Post(Designer value);
+        public Task<Designer> PostAsync(Designer value);
 
-        public Designer Put(int id, Designer value);
+        public Task<Designer> PutAsync(int id, Designer value);
 
-        public Designer Delete(int id);
+        public Task<Designer> DeleteAsync(int id);
     }
 }

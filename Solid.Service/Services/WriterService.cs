@@ -18,29 +18,29 @@ namespace Solid.Service.Services
             _writerRepository = dd; 
         }
 
-        public IEnumerable<Writer> GetAll()
+        public async Task<IEnumerable<Writer>> GetAllAsync()
         {
-            return _writerRepository.Get();
+            return await _writerRepository.GetAsync();
         }
 
-        public Writer GetById(int id)
+        public async Task<Writer >GetByIdAsync(int id)
         {
-            return _writerRepository.Get(id);
+            return await _writerRepository.GetAsync(id);
         }
 
-        public Writer PostWriter(Writer value)
+        public async Task<Writer> PostWriterAsync(Writer value)
         {
-            return _writerRepository.Post(value);
+            return await _writerRepository.PostAsync(value);
         }
 
-        public Writer PutWriter(int id, Writer value)
+        public async Task<Writer> PutWriterAsync(int id, Writer value)
         {
-            return _writerRepository.Put(id, value);
+            return await _writerRepository.PutAsync(id, value);
         }
 
-        public Writer DeleteWriter(int id)
+        public async Task<Writer> DeleteWriterAsync(int id)
         {
-            return _writerRepository.Delete(id);
+            return  await _writerRepository.DeleteAsync(id);
         }
 
        

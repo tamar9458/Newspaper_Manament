@@ -10,21 +10,22 @@ namespace Solid.Core.Services
 {
     public interface IWriterService
     {
-       
+      
 
-        public IEnumerable<Writer> GetAll();
-
-
-        public Writer GetById(int id);
+        public Task<IEnumerable<Writer>> GetAllAsync();
 
 
-        public Writer PostWriter(Writer value);
+        public Task<Writer> GetByIdAsync(int id);
 
 
-        public Writer PutWriter(int id, Writer value);
-        
-        public Writer DeleteWriter(int id);
-        
+        public Task<Writer> PostWriterAsync(Writer value);
+
+
+        public Task<Writer> PutWriterAsync(int id, Writer value);
+
+
+        public Task<Writer> DeleteWriterAsync(int id);
+
 
     }
 }

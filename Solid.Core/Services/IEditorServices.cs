@@ -10,19 +10,18 @@ namespace Solid.Core.Services
 {
     public interface IEditorService
     {
-       
-
-        public IEnumerable<Editor> GetAll();
+        public Task<IEnumerable<Editor>> GetAllAsync();
 
 
-        public Editor GetById(int id);
+        public Task<Editor> GetByIdAsync(int id);
 
 
-        public Editor PostEditor(Editor value);
+        public Task<Editor> PostEditorAsync(Editor value);
 
 
-        public Editor PutEditor(int id, Editor value);
+        public Task<Editor> PutEditorAsync(int id, Editor value);
 
-        public Editor DeleteEditor(int id);
+
+        public Task<Editor> DeleteEditorAsync(int id);
     }
 }
